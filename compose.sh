@@ -1,23 +1,21 @@
 #!/bin/sh
 
 
-DIR="$( cd "$( dirname "$0" )" && pwd )"
-
 cd $DIR
 
 if [ "$1" = "" ] ; then
     echo ERROR: start\|stop param missing.
 elif [ "$1" = "start" ] ; then
     # 准备数据文件夹
-    mkdir -p data/fdfs
-    if [ ! -d "$DIR/data/solr-home" ] ; then
-        echo "Copy solr-home to ./data/ ..."
-        cp -r solr/solr-home data/
+    mkdir -p /home/docker/fdfs
+    if [ ! -d "/home/docker/solr-home" ] ; then
+        echo "Copy solr-home to /home/docker/ ..."
+        cp -r solr/solr-home /home/docker/
     fi
     
     # 更新fastfs的IP, 此处也可直接填写虚拟机IP
-    IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
-    
+    #IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
+    IP=192.168.0.110
     sed -i "s|IP=.*$|IP=${IP}|g" fastdfs/docker-compose.yaml
     
     echo BATCH START: activemq, fastdfs,redis-single, solr, zookeeper

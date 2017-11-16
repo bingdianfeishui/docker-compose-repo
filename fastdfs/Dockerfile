@@ -58,7 +58,6 @@ events {\n\
 http {\n\
     include       mime.types;\n\
     default_type  application/octet-stream;\n\
-
     server {\n\
         listen 8888;\n\
         server_name localhost;\n\
