@@ -1,0 +1,1036 @@
+Step 1/18 : FROM alpine:3.6
+ ---> 053cde6e8953
+Step 2/18 : MAINTAINER Bubble Shrimp <bingdianfeishui@gmail.com>
+ ---> Running in 806b42cbbf12
+ ---> d7c2549b70ab
+Removing intermediate container 806b42cbbf12
+Step 3/18 : ENV HOME /root
+ ---> Running in 2944db05f5d8
+ ---> 587f87ac94b7
+Removing intermediate container 2944db05f5d8
+Step 4/18 : RUN apk update         && apk add --no-cache --virtual .build-deps bash gcc libc-dev make openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
+ ---> Running in a51020b3cbda
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.6/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.6/community/x86_64/APKINDEX.tar.gz
+v3.6.2-201-g6289c8472a [http://dl-cdn.alpinelinux.org/alpine/v3.6/main]
+v3.6.2-202-g73ecb97156 [http://dl-cdn.alpinelinux.org/alpine/v3.6/community]
+OK: 8438 distinct packages available
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.6/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.6/community/x86_64/APKINDEX.tar.gz
+(1/61) Installing ncurses-terminfo-base (6.0_p20170930-r0)
+(2/61) Installing ncurses-terminfo (6.0_p20170930-r0)
+(3/61) Installing ncurses-libs (6.0_p20170930-r0)
+(4/61) Installing readline (6.3.008-r5)
+(5/61) Installing bash (4.3.48-r1)
+Executing bash-4.3.48-r1.post-install
+(6/61) Installing binutils-libs (2.28-r3)
+(7/61) Installing binutils (2.28-r3)
+(8/61) Installing gmp (6.1.2-r0)
+(9/61) Installing isl (0.17.1-r0)
+(10/61) Installing libgomp (6.3.0-r4)
+(11/61) Installing libatomic (6.3.0-r4)
+(12/61) Installing pkgconf (1.3.7-r0)
+(13/61) Installing libgcc (6.3.0-r4)
+(14/61) Installing mpfr3 (3.1.5-r0)
+(15/61) Installing mpc1 (1.0.3-r0)
+(16/61) Installing libstdc++ (6.3.0-r4)
+(17/61) Installing gcc (6.3.0-r4)
+(18/61) Installing musl-dev (1.1.16-r14)
+(19/61) Installing libc-dev (0.7.1-r0)
+(20/61) Installing make (4.2.1-r0)
+(21/61) Installing zlib-dev (1.2.11-r0)
+(22/61) Installing libcrypto1.0 (1.0.2m-r0)
+(23/61) Installing libssl1.0 (1.0.2m-r0)
+(24/61) Installing openssl-dev (1.0.2m-r0)
+(25/61) Installing libpcre16 (8.41-r0)
+(26/61) Installing libpcre32 (8.41-r0)
+(27/61) Installing pcre (8.41-r0)
+(28/61) Installing libpcrecpp (8.41-r0)
+(29/61) Installing pcre-dev (8.41-r0)
+(30/61) Installing linux-headers (4.4.6-r2)
+(31/61) Installing ca-certificates (20161130-r2)
+(32/61) Installing libssh2 (1.8.0-r1)
+(33/61) Installing libcurl (7.56.1-r0)
+(34/61) Installing curl (7.56.1-r0)
+(35/61) Installing libgpg-error (1.27-r0)
+(36/61) Installing libassuan (2.4.3-r0)
+(37/61) Installing libcap (2.25-r1)
+(38/61) Installing pinentry (1.0.0-r0)
+Executing pinentry-1.0.0-r0.post-install
+(39/61) Installing libbz2 (1.0.6-r5)
+(40/61) Installing libgcrypt (1.7.9-r0)
+(41/61) Installing libksba (1.3.4-r0)
+(42/61) Installing db (5.3.28-r0)
+(43/61) Installing libsasl (2.1.26-r10)
+(44/61) Installing libldap (2.4.44-r5)
+(45/61) Installing npth (1.2-r0)
+(46/61) Installing gnupg (2.1.20-r0)
+(47/61) Installing libxml2 (2.9.4-r4)
+(48/61) Installing libxslt (1.1.29-r3)
+(49/61) Installing libxml2-dev (2.9.4-r4)
+(50/61) Installing libxslt-dev (1.1.29-r3)
+(51/61) Installing libpng (1.6.29-r1)
+(52/61) Installing freetype (2.7.1-r1)
+(53/61) Installing libjpeg-turbo (1.5.1-r0)
+(54/61) Installing libwebp (0.6.0-r0)
+(55/61) Installing libgd (2.2.4-r2)
+(56/61) Installing gd (2.2.4-r2)
+(57/61) Installing perl (5.24.3-r1)
+(58/61) Installing gd-dev (2.2.4-r2)
+(59/61) Installing geoip (1.6.10-r0)
+(60/61) Installing geoip-dev (1.6.10-r0)
+(61/61) Installing .build-deps (0)
+Executing busybox-1.26.2-r7.trigger
+Executing ca-certificates-20161130-r2.trigger
+OK: 187 MiB in 72 packages
+ ---> d6163d53d269
+Removing intermediate container a51020b3cbda
+Step 5/18 : RUN cd ${HOME}        && curl -fSL https://github.com/happyfish100/libfastcommon/archive/V1.0.36.tar.gz -o fastcommon.tar.gz         && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz         && curl -fSL  https://github.com/happyfish100/fastdfs-nginx-module/archive/master.tar.gz -o nginx-module.tar.gz         && tar zxf fastcommon.tar.gz         && tar zxf fastfs.tar.gz         && tar zxf nginx-module.tar.gz
+ ---> Running in 523bbfe31541
+[91m  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m100   135    0   135    0     0    135      0 --:--:--  0:00:01 --:--:--    97
+[0m[91m  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0[0m[91m  0  4[0m[91m24k    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0[0m[91m 43  424k   43  186k    0     0  63572      0  0:00:06  0:00:03  0:00:03 92670[0m[91m100  424k  100  424k    0     0   106k      0  0:00:04  0:00:04 --:--:--  181k
+[0m[91m  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Sp[0m[91meed
+  0     0    0     0    0     0      0      0 --:-[0m[91m-:-- --:--:-- -[0m[91m-:--:-- [0m[91m    0[0m[91m  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  4  329k    4 13700    0     0  13700      0  0:00:24  0:00:01  0:00:23  8638[0m[91m100  329k  100  329k    0     0   164k      0  0:00:02  0:00:02 --:--:--  134k
+[0m[91m  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0[0m[91m100   141    0   141    0     0    141      0 --:--:--  0:00:01 --:--:--    98
+[0m[91m  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0[0m[91m100 19830  100 19830    0     0   6610      0  0:00:03  0:00:03 --:--:-- 22559
+[0m ---> b9766ac31543
+Removing intermediate container 523bbfe31541
+Step 6/18 : RUN cd ${HOME}/libfastcommon-1.0.36/         && ./make.sh         && ./make.sh install
+ ---> Running in 6b47d9f1419e
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o hash.o hash.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o chain.o chain.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o shared_func.o shared_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o ini_file_reader.o ini_file_reader.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o logger.o logger.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o sockopt.o sockopt.c  
+[91mIn file included from sockopt.c:27:0:
+/usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+ #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+  ^~~~~~~
+[0mcc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o base64.o base64.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o sched_thread.o sched_thread.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o http_func.o http_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o md5.o md5.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o pthread_func.o pthread_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o local_ip_func.o local_ip_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o avl_tree.o avl_tree.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o ioevent.o ioevent.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o ioevent_loop.o ioevent_loop.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_task_queue.o fast_task_queue.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_timer.o fast_timer.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o process_ctrl.o process_ctrl.c  
+[91mprocess_ctrl.c: In function 'delete_pid_file':
+process_ctrl.c:52:5: warning: 'pid' may be used uninitialized in this function [-Wmaybe-uninitialized]
+     fprintf(stderr, "pid file: %s not mine, pid: %d != mine: %d",
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         pidFilename, (int)pid, (int)getpid());
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0m[91mprocess_ctrl.c: In function 'process_stop':
+process_ctrl.c:113:12: warning: 'pid' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   } while (kill(pid, SIGTERM) == 0);
+            ^~~~~~~~~~~~~~~~~~
+[0m[91mprocess_ctrl.c: In function 'process_restart':
+process_ctrl.c:129:14: warning: 'pid' may be used uninitialized in this function [-Wmaybe-uninitialized]
+     } while (kill(pid, SIGTERM) == 0);
+              ^~~~~~~~~~~~~~~~~~
+[0m[91mprocess_ctrl.c: In function 'process_start':
+process_ctrl.c:186:9: warning: 'pid' may be used uninitialized in this function [-Wmaybe-uninitialized]
+     if (kill(pid, 0) == 0) {
+         ^~~~~~~~~~~~
+[0m[91mprocess_ctrl.c: In function 'process_exist':
+process_ctrl.c:240:7: warning: 'pid' may be used uninitialized in this function [-Wmaybe-uninitialized]
+   if (kill(pid, 0) == 0) {
+       ^~~~~~~~~~~~
+[0mcc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_mblock.o fast_mblock.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o connection_pool.o connection_pool.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_mpool.o fast_mpool.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_allocator.o fast_allocator.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_buffer.o fast_buffer.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o multi_skiplist.o multi_skiplist.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o flat_skiplist.o flat_skiplist.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o system_info.o system_info.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o fast_blocked_queue.o fast_blocked_queue.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o id_generator.o id_generator.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o char_converter.o char_converter.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -o char_convert_loader.o char_convert_loader.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o hash.lo hash.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o chain.lo chain.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o shared_func.lo shared_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o ini_file_reader.lo ini_file_reader.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o logger.lo logger.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o sockopt.lo sockopt.c  
+[91mIn file included from sockopt.c:27:0:
+/usr/include/sys/poll.h:1:2: warning: #warning redirecting incorrect #include <sys/poll.h> to <poll.h> [-Wcpp]
+ #warning redirecting incorrect #include <sys/poll.h> to <poll.h>
+  ^~~~~~~
+[0mcc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o base64.lo base64.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o sched_thread.lo sched_thread.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o http_func.lo http_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o md5.lo md5.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o pthread_func.lo pthread_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o local_ip_func.lo local_ip_func.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o avl_tree.lo avl_tree.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o ioevent.lo ioevent.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o ioevent_loop.lo ioevent_loop.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_task_queue.lo fast_task_queue.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_timer.lo fast_timer.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o process_ctrl.lo process_ctrl.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_mblock.lo fast_mblock.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o connection_pool.lo connection_pool.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_mpool.lo fast_mpool.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_allocator.lo fast_allocator.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_buffer.lo fast_buffer.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o multi_skiplist.lo multi_skiplist.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o flat_skiplist.lo flat_skiplist.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o system_info.lo system_info.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o fast_blocked_queue.lo fast_blocked_queue.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o id_generator.lo id_generator.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o char_converter.lo char_converter.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -c -fPIC -o char_convert_loader.lo char_convert_loader.c  
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O3 -o libfastcommon.so  -shared hash.lo chain.lo shared_func.lo ini_file_reader.lo logger.lo sockopt.lo base64.lo sched_thread.lo http_func.lo md5.lo pthread_func.lo local_ip_func.lo avl_tree.lo ioevent.lo ioevent_loop.lo fast_task_queue.lo fast_timer.lo process_ctrl.lo fast_mblock.lo connection_pool.lo fast_mpool.lo fast_allocator.lo fast_buffer.lo multi_skiplist.lo flat_skiplist.lo system_info.lo fast_blocked_queue.lo id_generator.lo char_converter.lo char_convert_loader.lo -lm -lpthread
+ar rcs libfastcommon.a hash.o chain.o shared_func.o ini_file_reader.o logger.o sockopt.o base64.o sched_thread.o http_func.o md5.o pthread_func.o local_ip_func.o avl_tree.o ioevent.o ioevent_loop.o fast_task_queue.o fast_timer.o process_ctrl.o fast_mblock.o connection_pool.o fast_mpool.o fast_allocator.o fast_buffer.o multi_skiplist.o flat_skiplist.o system_info.o fast_blocked_queue.o id_generator.o char_converter.o char_convert_loader.o
+mkdir -p /usr/lib64
+mkdir -p /usr/lib
+install -m 755 libfastcommon.so /usr/lib64
+install -m 755 libfastcommon.so /usr/lib
+mkdir -p /usr/include/fastcommon
+install -m 644 common_define.h hash.h chain.h logger.h base64.h shared_func.h pthread_func.h ini_file_reader.h _os_define.h sockopt.h sched_thread.h http_func.h md5.h local_ip_func.h avl_tree.h ioevent.h ioevent_loop.h fast_task_queue.h fast_timer.h process_ctrl.h fast_mblock.h connection_pool.h fast_mpool.h fast_allocator.h fast_buffer.h skiplist.h multi_skiplist.h flat_skiplist.h skiplist_common.h system_info.h fast_blocked_queue.h php7_ext_wrapper.h id_generator.h char_converter.h char_convert_loader.h /usr/include/fastcommon
+ ---> 631508ae4e34
+Removing intermediate container 6b47d9f1419e
+Step 7/18 : RUN cd ${HOME}/fastdfs-5.11/         && ./make.sh         && ./make.sh install
+ ---> Running in f0366188440e
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../common/fdfs_global.o ../common/fdfs_global.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_proto.o tracker_proto.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_mem.o tracker_mem.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_service.o tracker_service.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_status.o tracker_status.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_global.o tracker_global.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_func.o tracker_func.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o fdfs_shared_func.o fdfs_shared_func.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_nio.o tracker_nio.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_relationship.o tracker_relationship.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_dump.o tracker_dump.c  -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_trackerd fdfs_trackerd.c  ../common/fdfs_global.o tracker_proto.o tracker_mem.o tracker_service.o tracker_status.o tracker_global.o tracker_func.o fdfs_shared_func.o tracker_nio.o tracker_relationship.o tracker_dump.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o tracker_client_thread.o tracker_client_thread.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_global.o storage_global.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_func.o storage_func.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_service.o storage_service.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_sync.o storage_sync.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_nio.o storage_nio.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_dio.o storage_dio.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_ip_changed_dealer.o storage_ip_changed_dealer.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_param_getter.o storage_param_getter.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_disk_recovery.o storage_disk_recovery.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o trunk_mgr/trunk_mem.o trunk_mgr/trunk_mem.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o trunk_mgr/trunk_shared.o trunk_mgr/trunk_shared.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o trunk_mgr/trunk_sync.o trunk_mgr/trunk_sync.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o trunk_mgr/trunk_client.o trunk_mgr/trunk_client.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o trunk_mgr/trunk_free_block_checker.o trunk_mgr/trunk_free_block_checker.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../client/client_global.o ../client/client_global.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../client/tracker_client.o ../client/tracker_client.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../client/storage_client.o ../client/storage_client.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../client/client_func.o ../client/client_func.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o fdht_client/fdht_proto.o fdht_client/fdht_proto.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o fdht_client/fdht_client.o fdht_client/fdht_client.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o fdht_client/fdht_func.o fdht_client/fdht_func.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o fdht_client/fdht_global.o fdht_client/fdht_global.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o storage_dump.o storage_dump.c  -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_storaged fdfs_storaged.c  ../common/fdfs_global.o ../tracker/fdfs_shared_func.o ../tracker/tracker_proto.o tracker_client_thread.o storage_global.o storage_func.o storage_service.o storage_sync.o storage_nio.o storage_dio.o storage_ip_changed_dealer.o storage_param_getter.o storage_disk_recovery.o trunk_mgr/trunk_mem.o trunk_mgr/trunk_shared.o trunk_mgr/trunk_sync.o trunk_mgr/trunk_client.o trunk_mgr/trunk_free_block_checker.o ../client/client_global.o ../client/tracker_client.o ../client/storage_client.o ../client/client_func.o fdht_client/fdht_proto.o fdht_client/fdht_client.o fdht_client/fdht_func.o fdht_client/fdht_global.o storage_dump.o -L/usr/lib64 -lpthread  -lfastcommon -I. -Itrunk_mgr -I../common -I../tracker -I../client -Ifdht_client -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../common/fdfs_http_shared.o ../common/fdfs_http_shared.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -o ../common/mime_file_parser.o ../common/mime_file_parser.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../common/fdfs_global.lo ../common/fdfs_global.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../common/fdfs_http_shared.lo ../common/fdfs_http_shared.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../common/mime_file_parser.lo ../common/mime_file_parser.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../tracker/tracker_proto.lo ../tracker/tracker_proto.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../tracker/fdfs_shared_func.lo ../tracker/fdfs_shared_func.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o ../storage/trunk_mgr/trunk_shared.lo ../storage/trunk_mgr/trunk_shared.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o tracker_client.lo tracker_client.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o client_func.lo client_func.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o client_global.lo client_global.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -c -fPIC -o storage_client.lo storage_client.c  -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_monitor fdfs_monitor.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_test fdfs_test.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_test1 fdfs_test1.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_crc32 fdfs_crc32.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_upload_file fdfs_upload_file.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_download_file fdfs_download_file.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_delete_file fdfs_delete_file.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_file_info fdfs_file_info.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_appender_test fdfs_appender_test.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_appender_test1 fdfs_appender_test1.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_append_file fdfs_append_file.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+cc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o fdfs_upload_appender fdfs_upload_appender.c  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o -L/usr/lib64 -lpthread -lfastcommon -I../common -I../tracker -I/usr/include/fastcommon
+ar cru libfdfsclient.a  ../common/fdfs_global.o ../common/fdfs_http_shared.o ../common/mime_file_parser.o ../tracker/tracker_proto.o ../tracker/fdfs_shared_func.o ../storage/trunk_mgr/trunk_shared.o tracker_client.o client_func.o client_global.o storage_client.o
+[91mar: `u' modifier ignored since `D' is the default (see `U')
+[0mcc -Wall -D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -g -O -DDEBUG_FLAG -o libfdfsclient.so  -shared ../common/fdfs_global.lo ../common/fdfs_http_shared.lo ../common/mime_file_parser.lo ../tracker/tracker_proto.lo ../tracker/fdfs_shared_func.lo ../storage/trunk_mgr/trunk_shared.lo tracker_client.lo client_func.lo client_global.lo storage_client.lo -L/usr/lib64 -lpthread -lfastcommon
+mkdir -p /usr/bin
+mkdir -p /etc/fdfs
+cp -f fdfs_trackerd /usr/bin
+if [ ! -f /etc/fdfs/tracker.conf.sample ]; then cp -f ../conf/tracker.conf /etc/fdfs/tracker.conf.sample; fi
+if [ ! -f /etc/fdfs/storage_ids.conf.sample ]; then cp -f ../conf/storage_ids.conf /etc/fdfs/storage_ids.conf.sample; fi
+mkdir -p /usr/bin
+mkdir -p /etc/fdfs
+cp -f fdfs_storaged  /usr/bin
+if [ ! -f /etc/fdfs/storage.conf.sample ]; then cp -f ../conf/storage.conf /etc/fdfs/storage.conf.sample; fi
+mkdir -p /usr/bin
+mkdir -p /etc/fdfs
+mkdir -p /usr/lib64
+mkdir -p /usr/lib
+cp -f fdfs_monitor fdfs_test fdfs_test1 fdfs_crc32 fdfs_upload_file fdfs_download_file fdfs_delete_file fdfs_file_info fdfs_appender_test fdfs_appender_test1 fdfs_append_file fdfs_upload_appender /usr/bin
+if [ 0 -eq 1 ]; then cp -f libfdfsclient.a /usr/lib64; cp -f libfdfsclient.a /usr/lib/;fi
+if [ 1 -eq 1 ]; then cp -f libfdfsclient.so /usr/lib64; cp -f libfdfsclient.so /usr/lib/;fi
+mkdir -p /usr/include/fastdfs
+cp -f ../common/fdfs_define.h ../common/fdfs_global.h ../common/mime_file_parser.h ../common/fdfs_http_shared.h ../tracker/tracker_types.h ../tracker/tracker_proto.h ../tracker/fdfs_shared_func.h ../storage/trunk_mgr/trunk_shared.h tracker_client.h storage_client.h storage_client1.h client_func.h client_global.h fdfs_client.h /usr/include/fastdfs
+if [ ! -f /etc/fdfs/client.conf.sample ]; then cp -f ../conf/client.conf /etc/fdfs/client.conf.sample; fi
+ ---> 02480a665e76
+Removing intermediate container f0366188440e
+Step 8/18 : RUN mkdir -p /var/local/fdfs/storage /var/local/fdfs/tracker         && cd /etc/fdfs/ && cp storage.conf.sample storage.conf && cp tracker.conf.sample tracker.conf         && sed -i "s|base_path=/home/yuqing/fastdfs|base_path=/var/local/fdfs/tracker|g" /etc/fdfs/tracker.conf         && sed -i "s|/home/yuqing/fastdfs|/var/local/fdfs/storage|g" /etc/fdfs/storage.conf
+ ---> Running in 5d505de7f8c6
+ ---> 9c512f7eda2e
+Removing intermediate container 5d505de7f8c6
+Step 9/18 : RUN curl -fSL http://nginx.org/download/nginx-1.12.2.tar.gz -o nginx-1.12.2.tar.gz         && tar zxf nginx-1.12.2.tar.gz         && chmod u+x ${HOME}/fastdfs-nginx-module-master/src/config         && cd nginx-1.12.2         && ./configure --add-module=${HOME}/fastdfs-nginx-module-master/src         && make && make install
+ ---> Running in 3e513444a0ed
+[91m  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0[0m[91m  4  958k    4 45798    0     0  45798      0  0:00:21  0:00:01  0:00:20 36697[0m[91m 31  958k   31  304k    0     0   152k      0  0:00:06  0:00:02  0:00:04  136k[0m[91m 90  958k   90  868k    0     0   289k      0  0:00:03  0:00:03 --:--:--  268k[0m[91m100  958k  100  958k    0     0   319k      0  0:00:03  0:00:03 --:--:--  296k
+[0mchecking for OS
+ + Linux 4.8.0-53-generic x86_64
+checking for C compiler ... found
+ + using GNU C compiler
+ + gcc version: 6.3.0 (Alpine 6.3.0) 
+checking for gcc -pipe switch ... found
+checking for -Wl,-E switch ... found
+checking for gcc builtin atomic operations ... found
+checking for C99 variadic macros ... found
+checking for gcc variadic macros ... found
+checking for gcc builtin 64 bit byteswap ... found
+checking for unistd.h ... found
+checking for inttypes.h ... found
+checking for limits.h ... found
+checking for sys/filio.h ... not found
+checking for sys/param.h ... found
+checking for sys/mount.h ... found
+checking for sys/statvfs.h ... found
+checking for crypt.h ... found
+checking for Linux specific features
+checking for epoll ... found
+checking for EPOLLRDHUP ... found
+checking for EPOLLEXCLUSIVE ... found
+checking for O_PATH ... found
+checking for sendfile() ... found
+checking for sendfile64() ... found
+checking for sys/prctl.h ... found
+checking for prctl(PR_SET_DUMPABLE) ... found
+checking for sched_setaffinity() ... found
+checking for crypt_r() ... found
+checking for sys/vfs.h ... found
+checking for nobody group ... found
+checking for poll() ... found
+checking for /dev/poll ... not found
+checking for kqueue ... not found
+checking for crypt() ... found
+checking for F_READAHEAD ... not found
+checking for posix_fadvise() ... found
+checking for O_DIRECT ... found
+checking for F_NOCACHE ... not found
+checking for directio() ... not found
+checking for statfs() ... found
+checking for statvfs() ... found
+checking for dlopen() ... found
+checking for sched_yield() ... found
+checking for SO_SETFIB ... not found
+checking for SO_REUSEPORT ... found
+checking for SO_ACCEPTFILTER ... not found
+checking for SO_BINDANY ... not found
+checking for IP_BIND_ADDRESS_NO_PORT ... found
+checking for IP_TRANSPARENT ... found
+checking for IP_BINDANY ... not found
+checking for IP_RECVDSTADDR ... not found
+checking for IP_PKTINFO ... found
+checking for IPV6_RECVPKTINFO ... found
+checking for TCP_DEFER_ACCEPT ... found
+checking for TCP_KEEPIDLE ... found
+checking for TCP_FASTOPEN ... found
+checking for TCP_INFO ... found
+checking for accept4() ... found
+checking for eventfd() ... found
+checking for int size ... 4 bytes
+checking for long size ... 8 bytes
+checking for long long size ... 8 bytes
+checking for void * size ... 8 bytes
+checking for uint32_t ... found
+checking for uint64_t ... found
+checking for sig_atomic_t ... found
+checking for sig_atomic_t size ... 4 bytes
+checking for socklen_t ... found
+checking for in_addr_t ... found
+checking for in_port_t ... found
+checking for rlim_t ... found
+checking for uintptr_t ... uintptr_t found
+checking for system byte ordering ... little endian
+checking for size_t size ... 8 bytes
+checking for off_t size ... 8 bytes
+checking for time_t size ... 8 bytes
+checking for AF_INET6 ... found
+checking for setproctitle() ... not found
+checking for pread() ... found
+checking for pwrite() ... found
+checking for pwritev() ... found
+checking for sys_nerr ... not found
+checking for _sys_nerr ... not found
+checking for maximum errno ... found
+checking for localtime_r() ... found
+checking for posix_memalign() ... found
+checking for memalign() ... found
+checking for mmap(MAP_ANON|MAP_SHARED) ... found
+checking for mmap("/dev/zero", MAP_SHARED) ... found
+checking for System V shared memory ... found
+checking for POSIX semaphores ... found
+checking for struct msghdr.msg_control ... found
+checking for ioctl(FIONBIO) ... found
+checking for struct tm.tm_gmtoff ... found
+checking for struct dirent.d_namlen ... not found
+checking for struct dirent.d_type ... found
+checking for sysconf(_SC_NPROCESSORS_ONLN) ... found
+checking for openat(), fstatat() ... found
+checking for getaddrinfo() ... found
+configuring additional modules
+adding module in /root/fastdfs-nginx-module-master/src
+ + ngx_http_fastdfs_module was configured
+checking for PCRE library ... found
+checking for PCRE JIT support ... found
+checking for zlib library ... found
+creating objs/Makefile
+
+Configuration summary
+  + using system PCRE library
+  + OpenSSL library is not used
+  + using system zlib library
+
+  nginx path prefix: "/usr/local/nginx"
+  nginx binary file: "/usr/local/nginx/sbin/nginx"
+  nginx modules path: "/usr/local/nginx/modules"
+  nginx configuration prefix: "/usr/local/nginx/conf"
+  nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
+  nginx pid file: "/usr/local/nginx/logs/nginx.pid"
+  nginx error log file: "/usr/local/nginx/logs/error.log"
+  nginx http access log file: "/usr/local/nginx/logs/access.log"
+  nginx http client request body temporary files: "client_body_temp"
+  nginx http proxy temporary files: "proxy_temp"
+  nginx http fastcgi temporary files: "fastcgi_temp"
+  nginx http uwsgi temporary files: "uwsgi_temp"
+  nginx http scgi temporary files: "scgi_temp"
+
+make -f objs/Makefile
+make[1]: Entering directory '/nginx-1.12.2'
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/nginx.o \
+	src/core/nginx.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_log.o \
+	src/core/ngx_log.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_palloc.o \
+	src/core/ngx_palloc.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_array.o \
+	src/core/ngx_array.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_list.o \
+	src/core/ngx_list.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_hash.o \
+	src/core/ngx_hash.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_buf.o \
+	src/core/ngx_buf.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_queue.o \
+	src/core/ngx_queue.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_output_chain.o \
+	src/core/ngx_output_chain.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_string.o \
+	src/core/ngx_string.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_parse.o \
+	src/core/ngx_parse.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_parse_time.o \
+	src/core/ngx_parse_time.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_inet.o \
+	src/core/ngx_inet.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_file.o \
+	src/core/ngx_file.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_crc32.o \
+	src/core/ngx_crc32.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_murmurhash.o \
+	src/core/ngx_murmurhash.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_md5.o \
+	src/core/ngx_md5.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_sha1.o \
+	src/core/ngx_sha1.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_rbtree.o \
+	src/core/ngx_rbtree.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_radix_tree.o \
+	src/core/ngx_radix_tree.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_slab.o \
+	src/core/ngx_slab.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_times.o \
+	src/core/ngx_times.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_shmtx.o \
+	src/core/ngx_shmtx.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_connection.o \
+	src/core/ngx_connection.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_cycle.o \
+	src/core/ngx_cycle.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_spinlock.o \
+	src/core/ngx_spinlock.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_rwlock.o \
+	src/core/ngx_rwlock.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_cpuinfo.o \
+	src/core/ngx_cpuinfo.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_conf_file.o \
+	src/core/ngx_conf_file.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_module.o \
+	src/core/ngx_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_resolver.o \
+	src/core/ngx_resolver.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_open_file_cache.o \
+	src/core/ngx_open_file_cache.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_crypt.o \
+	src/core/ngx_crypt.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_proxy_protocol.o \
+	src/core/ngx_proxy_protocol.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_syslog.o \
+	src/core/ngx_syslog.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event.o \
+	src/event/ngx_event.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_timer.o \
+	src/event/ngx_event_timer.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_posted.o \
+	src/event/ngx_event_posted.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_accept.o \
+	src/event/ngx_event_accept.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_connect.o \
+	src/event/ngx_event_connect.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_pipe.o \
+	src/event/ngx_event_pipe.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_time.o \
+	src/os/unix/ngx_time.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_errno.o \
+	src/os/unix/ngx_errno.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_alloc.o \
+	src/os/unix/ngx_alloc.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_files.o \
+	src/os/unix/ngx_files.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_socket.o \
+	src/os/unix/ngx_socket.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_recv.o \
+	src/os/unix/ngx_recv.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_readv_chain.o \
+	src/os/unix/ngx_readv_chain.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_udp_recv.o \
+	src/os/unix/ngx_udp_recv.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_send.o \
+	src/os/unix/ngx_send.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_writev_chain.o \
+	src/os/unix/ngx_writev_chain.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_udp_send.o \
+	src/os/unix/ngx_udp_send.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_udp_sendmsg_chain.o \
+	src/os/unix/ngx_udp_sendmsg_chain.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_channel.o \
+	src/os/unix/ngx_channel.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_shmem.o \
+	src/os/unix/ngx_shmem.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_process.o \
+	src/os/unix/ngx_process.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_daemon.o \
+	src/os/unix/ngx_daemon.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_setaffinity.o \
+	src/os/unix/ngx_setaffinity.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_setproctitle.o \
+	src/os/unix/ngx_setproctitle.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_posix_init.o \
+	src/os/unix/ngx_posix_init.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_user.o \
+	src/os/unix/ngx_user.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_dlopen.o \
+	src/os/unix/ngx_dlopen.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_process_cycle.o \
+	src/os/unix/ngx_process_cycle.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_linux_init.o \
+	src/os/unix/ngx_linux_init.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/modules/ngx_epoll_module.o \
+	src/event/modules/ngx_epoll_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_linux_sendfile_chain.o \
+	src/os/unix/ngx_linux_sendfile_chain.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_regex.o \
+	src/core/ngx_regex.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http.o \
+	src/http/ngx_http.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_core_module.o \
+	src/http/ngx_http_core_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_special_response.o \
+	src/http/ngx_http_special_response.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_request.o \
+	src/http/ngx_http_request.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_parse.o \
+	src/http/ngx_http_parse.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_log_module.o \
+	src/http/modules/ngx_http_log_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_request_body.o \
+	src/http/ngx_http_request_body.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_variables.o \
+	src/http/ngx_http_variables.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_script.o \
+	src/http/ngx_http_script.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_upstream.o \
+	src/http/ngx_http_upstream.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_upstream_round_robin.o \
+	src/http/ngx_http_upstream_round_robin.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_file_cache.o \
+	src/http/ngx_http_file_cache.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_write_filter_module.o \
+	src/http/ngx_http_write_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_header_filter_module.o \
+	src/http/ngx_http_header_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_chunked_filter_module.o \
+	src/http/modules/ngx_http_chunked_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_range_filter_module.o \
+	src/http/modules/ngx_http_range_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_gzip_filter_module.o \
+	src/http/modules/ngx_http_gzip_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_postpone_filter_module.o \
+	src/http/ngx_http_postpone_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_ssi_filter_module.o \
+	src/http/modules/ngx_http_ssi_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_charset_filter_module.o \
+	src/http/modules/ngx_http_charset_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_userid_filter_module.o \
+	src/http/modules/ngx_http_userid_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_headers_filter_module.o \
+	src/http/modules/ngx_http_headers_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/ngx_http_copy_filter_module.o \
+	src/http/ngx_http_copy_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+	src/http/modules/ngx_http_not_modified_filter_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_static_module.o \
+	src/http/modules/ngx_http_static_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_autoindex_module.o \
+	src/http/modules/ngx_http_autoindex_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_index_module.o \
+	src/http/modules/ngx_http_index_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_auth_basic_module.o \
+	src/http/modules/ngx_http_auth_basic_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_access_module.o \
+	src/http/modules/ngx_http_access_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_limit_conn_module.o \
+	src/http/modules/ngx_http_limit_conn_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_limit_req_module.o \
+	src/http/modules/ngx_http_limit_req_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_geo_module.o \
+	src/http/modules/ngx_http_geo_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_map_module.o \
+	src/http/modules/ngx_http_map_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_split_clients_module.o \
+	src/http/modules/ngx_http_split_clients_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_referer_module.o \
+	src/http/modules/ngx_http_referer_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_rewrite_module.o \
+	src/http/modules/ngx_http_rewrite_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_proxy_module.o \
+	src/http/modules/ngx_http_proxy_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_fastcgi_module.o \
+	src/http/modules/ngx_http_fastcgi_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_uwsgi_module.o \
+	src/http/modules/ngx_http_uwsgi_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_scgi_module.o \
+	src/http/modules/ngx_http_scgi_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_memcached_module.o \
+	src/http/modules/ngx_http_memcached_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_empty_gif_module.o \
+	src/http/modules/ngx_http_empty_gif_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_browser_module.o \
+	src/http/modules/ngx_http_browser_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_upstream_hash_module.o \
+	src/http/modules/ngx_http_upstream_hash_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
+	src/http/modules/ngx_http_upstream_ip_hash_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_upstream_least_conn_module.o \
+	src/http/modules/ngx_http_upstream_least_conn_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_upstream_keepalive_module.o \
+	src/http/modules/ngx_http_upstream_keepalive_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/src/http/modules/ngx_http_upstream_zone_module.o \
+	src/http/modules/ngx_http_upstream_zone_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"'  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules -I /usr/include/fastdfs -I /usr/include/fastcommon/ \
+	-o objs/addon/src/ngx_http_fastdfs_module.o \
+	/root/fastdfs-nginx-module-master/src/ngx_http_fastdfs_module.c
+cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -D_FILE_OFFSET_BITS=64 -DFDFS_OUTPUT_CHUNK_SIZE='256*1024' -DFDFS_MOD_CONF_FILENAME='"/etc/fdfs/mod_fastdfs.conf"' -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/ngx_modules.o \
+	objs/ngx_modules.c
+cc -o objs/nginx \
+objs/src/core/nginx.o \
+objs/src/core/ngx_log.o \
+objs/src/core/ngx_palloc.o \
+objs/src/core/ngx_array.o \
+objs/src/core/ngx_list.o \
+objs/src/core/ngx_hash.o \
+objs/src/core/ngx_buf.o \
+objs/src/core/ngx_queue.o \
+objs/src/core/ngx_output_chain.o \
+objs/src/core/ngx_string.o \
+objs/src/core/ngx_parse.o \
+objs/src/core/ngx_parse_time.o \
+objs/src/core/ngx_inet.o \
+objs/src/core/ngx_file.o \
+objs/src/core/ngx_crc32.o \
+objs/src/core/ngx_murmurhash.o \
+objs/src/core/ngx_md5.o \
+objs/src/core/ngx_sha1.o \
+objs/src/core/ngx_rbtree.o \
+objs/src/core/ngx_radix_tree.o \
+objs/src/core/ngx_slab.o \
+objs/src/core/ngx_times.o \
+objs/src/core/ngx_shmtx.o \
+objs/src/core/ngx_connection.o \
+objs/src/core/ngx_cycle.o \
+objs/src/core/ngx_spinlock.o \
+objs/src/core/ngx_rwlock.o \
+objs/src/core/ngx_cpuinfo.o \
+objs/src/core/ngx_conf_file.o \
+objs/src/core/ngx_module.o \
+objs/src/core/ngx_resolver.o \
+objs/src/core/ngx_open_file_cache.o \
+objs/src/core/ngx_crypt.o \
+objs/src/core/ngx_proxy_protocol.o \
+objs/src/core/ngx_syslog.o \
+objs/src/event/ngx_event.o \
+objs/src/event/ngx_event_timer.o \
+objs/src/event/ngx_event_posted.o \
+objs/src/event/ngx_event_accept.o \
+objs/src/event/ngx_event_connect.o \
+objs/src/event/ngx_event_pipe.o \
+objs/src/os/unix/ngx_time.o \
+objs/src/os/unix/ngx_errno.o \
+objs/src/os/unix/ngx_alloc.o \
+objs/src/os/unix/ngx_files.o \
+objs/src/os/unix/ngx_socket.o \
+objs/src/os/unix/ngx_recv.o \
+objs/src/os/unix/ngx_readv_chain.o \
+objs/src/os/unix/ngx_udp_recv.o \
+objs/src/os/unix/ngx_send.o \
+objs/src/os/unix/ngx_writev_chain.o \
+objs/src/os/unix/ngx_udp_send.o \
+objs/src/os/unix/ngx_udp_sendmsg_chain.o \
+objs/src/os/unix/ngx_channel.o \
+objs/src/os/unix/ngx_shmem.o \
+objs/src/os/unix/ngx_process.o \
+objs/src/os/unix/ngx_daemon.o \
+objs/src/os/unix/ngx_setaffinity.o \
+objs/src/os/unix/ngx_setproctitle.o \
+objs/src/os/unix/ngx_posix_init.o \
+objs/src/os/unix/ngx_user.o \
+objs/src/os/unix/ngx_dlopen.o \
+objs/src/os/unix/ngx_process_cycle.o \
+objs/src/os/unix/ngx_linux_init.o \
+objs/src/event/modules/ngx_epoll_module.o \
+objs/src/os/unix/ngx_linux_sendfile_chain.o \
+objs/src/core/ngx_regex.o \
+objs/src/http/ngx_http.o \
+objs/src/http/ngx_http_core_module.o \
+objs/src/http/ngx_http_special_response.o \
+objs/src/http/ngx_http_request.o \
+objs/src/http/ngx_http_parse.o \
+objs/src/http/modules/ngx_http_log_module.o \
+objs/src/http/ngx_http_request_body.o \
+objs/src/http/ngx_http_variables.o \
+objs/src/http/ngx_http_script.o \
+objs/src/http/ngx_http_upstream.o \
+objs/src/http/ngx_http_upstream_round_robin.o \
+objs/src/http/ngx_http_file_cache.o \
+objs/src/http/ngx_http_write_filter_module.o \
+objs/src/http/ngx_http_header_filter_module.o \
+objs/src/http/modules/ngx_http_chunked_filter_module.o \
+objs/src/http/modules/ngx_http_range_filter_module.o \
+objs/src/http/modules/ngx_http_gzip_filter_module.o \
+objs/src/http/ngx_http_postpone_filter_module.o \
+objs/src/http/modules/ngx_http_ssi_filter_module.o \
+objs/src/http/modules/ngx_http_charset_filter_module.o \
+objs/src/http/modules/ngx_http_userid_filter_module.o \
+objs/src/http/modules/ngx_http_headers_filter_module.o \
+objs/src/http/ngx_http_copy_filter_module.o \
+objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+objs/src/http/modules/ngx_http_static_module.o \
+objs/src/http/modules/ngx_http_autoindex_module.o \
+objs/src/http/modules/ngx_http_index_module.o \
+objs/src/http/modules/ngx_http_auth_basic_module.o \
+objs/src/http/modules/ngx_http_access_module.o \
+objs/src/http/modules/ngx_http_limit_conn_module.o \
+objs/src/http/modules/ngx_http_limit_req_module.o \
+objs/src/http/modules/ngx_http_geo_module.o \
+objs/src/http/modules/ngx_http_map_module.o \
+objs/src/http/modules/ngx_http_split_clients_module.o \
+objs/src/http/modules/ngx_http_referer_module.o \
+objs/src/http/modules/ngx_http_rewrite_module.o \
+objs/src/http/modules/ngx_http_proxy_module.o \
+objs/src/http/modules/ngx_http_fastcgi_module.o \
+objs/src/http/modules/ngx_http_uwsgi_module.o \
+objs/src/http/modules/ngx_http_scgi_module.o \
+objs/src/http/modules/ngx_http_memcached_module.o \
+objs/src/http/modules/ngx_http_empty_gif_module.o \
+objs/src/http/modules/ngx_http_browser_module.o \
+objs/src/http/modules/ngx_http_upstream_hash_module.o \
+objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
+objs/src/http/modules/ngx_http_upstream_least_conn_module.o \
+objs/src/http/modules/ngx_http_upstream_keepalive_module.o \
+objs/src/http/modules/ngx_http_upstream_zone_module.o \
+objs/addon/src/ngx_http_fastdfs_module.o \
+objs/ngx_modules.o \
+-lfastcommon -lfdfsclient -lpcre -lz \
+-Wl,-E
+sed -e "s|%%PREFIX%%|/usr/local/nginx|" \
+	-e "s|%%PID_PATH%%|/usr/local/nginx/logs/nginx.pid|" \
+	-e "s|%%CONF_PATH%%|/usr/local/nginx/conf/nginx.conf|" \
+	-e "s|%%ERROR_LOG_PATH%%|/usr/local/nginx/logs/error.log|" \
+	< man/nginx.8 > objs/nginx.8
+make[1]: Leaving directory '/nginx-1.12.2'
+make -f objs/Makefile install
+make[1]: Entering directory '/nginx-1.12.2'
+test -d '/usr/local/nginx' || mkdir -p '/usr/local/nginx'
+test -d '/usr/local/nginx/sbin' \
+	|| mkdir -p '/usr/local/nginx/sbin'
+test ! -f '/usr/local/nginx/sbin/nginx' \
+	|| mv '/usr/local/nginx/sbin/nginx' \
+		'/usr/local/nginx/sbin/nginx.old'
+cp objs/nginx '/usr/local/nginx/sbin/nginx'
+test -d '/usr/local/nginx/conf' \
+	|| mkdir -p '/usr/local/nginx/conf'
+cp conf/koi-win '/usr/local/nginx/conf'
+cp conf/koi-utf '/usr/local/nginx/conf'
+cp conf/win-utf '/usr/local/nginx/conf'
+test -f '/usr/local/nginx/conf/mime.types' \
+	|| cp conf/mime.types '/usr/local/nginx/conf'
+cp conf/mime.types '/usr/local/nginx/conf/mime.types.default'
+test -f '/usr/local/nginx/conf/fastcgi_params' \
+	|| cp conf/fastcgi_params '/usr/local/nginx/conf'
+cp conf/fastcgi_params \
+	'/usr/local/nginx/conf/fastcgi_params.default'
+test -f '/usr/local/nginx/conf/fastcgi.conf' \
+	|| cp conf/fastcgi.conf '/usr/local/nginx/conf'
+cp conf/fastcgi.conf '/usr/local/nginx/conf/fastcgi.conf.default'
+test -f '/usr/local/nginx/conf/uwsgi_params' \
+	|| cp conf/uwsgi_params '/usr/local/nginx/conf'
+cp conf/uwsgi_params \
+	'/usr/local/nginx/conf/uwsgi_params.default'
+test -f '/usr/local/nginx/conf/scgi_params' \
+	|| cp conf/scgi_params '/usr/local/nginx/conf'
+cp conf/scgi_params \
+	'/usr/local/nginx/conf/scgi_params.default'
+test -f '/usr/local/nginx/conf/nginx.conf' \
+	|| cp conf/nginx.conf '/usr/local/nginx/conf/nginx.conf'
+cp conf/nginx.conf '/usr/local/nginx/conf/nginx.conf.default'
+test -d '/usr/local/nginx/logs' \
+	|| mkdir -p '/usr/local/nginx/logs'
+test -d '/usr/local/nginx/logs' \
+	|| mkdir -p '/usr/local/nginx/logs'
+test -d '/usr/local/nginx/html' \
+	|| cp -R html '/usr/local/nginx'
+test -d '/usr/local/nginx/logs' \
+	|| mkdir -p '/usr/local/nginx/logs'
+make[1]: Leaving directory '/nginx-1.12.2'
+ ---> 3334ec268c87
+Removing intermediate container 3e513444a0ed
+Step 10/18 : RUN rm -rf ${HOME}/*
+ ---> Running in 8b28ce795a7b
+ ---> ed83e4309eb8
+Removing intermediate container 8b28ce795a7b
+Step 11/18 : RUN apk del .build-deps
+ ---> Running in 4c836dbf6349
+(1/61) Purging .build-deps (0)
+(2/61) Purging bash (4.3.48-r1)
+Executing bash-4.3.48-r1.pre-deinstall
+(3/61) Purging gcc (6.3.0-r4)
+(4/61) Purging binutils (2.28-r3)
+(5/61) Purging libatomic (6.3.0-r4)
+(6/61) Purging libgomp (6.3.0-r4)
+(7/61) Purging libc-dev (0.7.1-r0)
+(8/61) Purging musl-dev (1.1.16-r14)
+(9/61) Purging make (4.2.1-r0)
+(10/61) Purging openssl-dev (1.0.2m-r0)
+(11/61) Purging libssl1.0 (1.0.2m-r0)
+(12/61) Purging pcre-dev (8.41-r0)
+(13/61) Purging libpcre16 (8.41-r0)
+(14/61) Purging libpcre32 (8.41-r0)
+(15/61) Purging libpcrecpp (8.41-r0)
+(16/61) Purging pcre (8.41-r0)
+(17/61) Purging linux-headers (4.4.6-r2)
+(18/61) Purging curl (7.56.1-r0)
+(19/61) Purging gnupg (2.1.20-r0)
+(20/61) Purging pinentry (1.0.0-r0)
+Executing pinentry-1.0.0-r0.post-deinstall
+(21/61) Purging libxslt-dev (1.1.29-r3)
+(22/61) Purging libxslt (1.1.29-r3)
+(23/61) Purging gd-dev (2.2.4-r2)
+(24/61) Purging gd (2.2.4-r2)
+(25/61) Purging perl (5.24.3-r1)
+(26/61) Purging libgd (2.2.4-r2)
+(27/61) Purging geoip-dev (1.6.10-r0)
+(28/61) Purging geoip (1.6.10-r0)
+(29/61) Purging readline (6.3.008-r5)
+(30/61) Purging ncurses-libs (6.0_p20170930-r0)
+(31/61) Purging ncurses-terminfo (6.0_p20170930-r0)
+(32/61) Purging ncurses-terminfo-base (6.0_p20170930-r0)
+(33/61) Purging binutils-libs (2.28-r3)
+(34/61) Purging mpc1 (1.0.3-r0)
+(35/61) Purging mpfr3 (3.1.5-r0)
+(36/61) Purging isl (0.17.1-r0)
+(37/61) Purging gmp (6.1.2-r0)
+(38/61) Purging libxml2-dev (2.9.4-r4)
+(39/61) Purging libxml2 (2.9.4-r4)
+(40/61) Purging zlib-dev (1.2.11-r0)
+(41/61) Purging pkgconf (1.3.7-r0)
+(42/61) Purging libstdc++ (6.3.0-r4)
+(43/61) Purging libgcc (6.3.0-r4)
+(44/61) Purging libcrypto1.0 (1.0.2m-r0)
+(45/61) Purging libcurl (7.56.1-r0)
+(46/61) Purging ca-certificates (20161130-r2)
+Executing ca-certificates-20161130-r2.post-deinstall
+(47/61) Purging libssh2 (1.8.0-r1)
+(48/61) Purging libksba (1.3.4-r0)
+(49/61) Purging libassuan (2.4.3-r0)
+(50/61) Purging libgcrypt (1.7.9-r0)
+(51/61) Purging libgpg-error (1.27-r0)
+(52/61) Purging libcap (2.25-r1)
+(53/61) Purging freetype (2.7.1-r1)
+(54/61) Purging libbz2 (1.0.6-r5)
+(55/61) Purging libldap (2.4.44-r5)
+(56/61) Purging libsasl (2.1.26-r10)
+(57/61) Purging db (5.3.28-r0)
+(58/61) Purging npth (1.2-r0)
+(59/61) Purging libpng (1.6.29-r1)
+(60/61) Purging libjpeg-turbo (1.5.1-r0)
+(61/61) Purging libwebp (0.6.0-r0)
+Executing busybox-1.26.2-r7.trigger
+OK: 4 MiB in 11 packages
+ ---> 7f19b8ffcaf2
+Removing intermediate container 4c836dbf6349
+Step 12/18 : RUN apk del gcc libc-dev make openssl-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
+ ---> Running in c96475e64212
+OK: 4 MiB in 11 packages
+ ---> f96ccf88ba5f
+Removing intermediate container c96475e64212
+Step 13/18 : RUN cp ${HOME}/fastdfs-nginx-module-master/src/mod_fastdfs.conf /etc/fdfs/         && sed -i "s|^store_path0.*$|store_path0=/var/local/fdfs/storage|g" /etc/fdfs/mod_fastdfs.conf         && sed -i "s|^url_have_group_name =.*$|url_have_group_name = true|g" /etc/fdfs/mod_fastdfs.conf         && cd ${HOME}/fastdfs-5.11/conf/         && cp http.conf mime.types anti-steal.jpg /etc/fdfs/         && mkdir -p /var/local/fdfs/storage/data         && ln -s /var/local/fdfs/storage/data/ /var/local/fdfs/storage/data/M00         && echo -e "events {\n    worker_connections  1024;\n}\nhttp {\n    include       mime.types;\n    default_type  application/octet-stream;\n    server {\n        listen 8888;\n        server_name localhost;\n        location ~ /group[0-9]/M00 {\n            ngx_fastdfs_module;\n        }\n    }\n}">/usr/local/nginx/conf/nginx.conf
+ ---> Running in 2d6f6e69bd9d
+[91mcp: can't stat '/root/fastdfs-nginx-module-master/src/mod_fastdfs.conf': No such file or directory
+[0mRemoving intermediate container 2d6f6e69bd9d

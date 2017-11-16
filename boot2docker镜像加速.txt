@@ -1,0 +1,19 @@
+Boot2Docker 加速镜像
+docker-machine ssh default
+    sudo sed -i "s|EXTRA_ARGS='|EXTRA_ARGS='--registry-mirror=https://registry.docker-cn.com |g" /var/lib/boot2docker/profile
+    exit
+    docker-machine restart default
+
+安装vim
+tce-load vim.tcz
+
+
+sudo mkdir -p /etc/docker
+sudo vim /etc/docker/daemon.json
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker
