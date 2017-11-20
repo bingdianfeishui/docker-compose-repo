@@ -44,4 +44,4 @@ $ ./compose.sh start
 注意：
 `compose.sh `仅启动了一些常用的开发环境，若要启动其他的容器，请手动cd到相应目录执行docker-compose up -d.
 
-<em color="red">顺便安利一个SSH客户端，mobaXterm，已用多年，墙裂推荐。</em>
+<em style='color:red'>顺便安利一个SSH客户端，mobaXterm，已用多年，墙裂推荐。</em>
