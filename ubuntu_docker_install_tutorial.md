@@ -50,48 +50,54 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe m
 
 ### 安装必要环境
 
-```
+```shell
 $ sudo apt-get update
 $ sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
 ```
 
 ### 添加docker-ce源地址
 
-** For [aliyun docker-ce repository](https://yq.aliyun.com/articles/110806?commentId=11066)(推荐，速度快) **
+**For [aliyun docker-ce repository](https://yq.aliyun.com/articles/110806?commentId=11066)(版本基本同官方，速度快，推荐)**
 
-```
+```shell
 $ curl -fsSL http://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
 $ sudo add-apt-repository "deb [arch=amd64] http://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
-** For [official docker-ce repository](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository) **
+**For [official docker-ce repository](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#set-up-the-repository)(版本最新)**
 
-```
+```shell
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 ### 安装docker-ce
 
-```
+```shell
 $ sudo apt-get -y update
 $ sudo apt-get -y install docker-ce
+# 检查docker
+$ docker -v
+Docker version 17.09.0-ce, build afdb6d4
 ```
 
 ### 修改镜像地址
 
-```
+```shell
 $ sudo vim /etc/docker/daemon.json
 
-	# input below and save
-	{
-	  "registry-mirrors": ["https://registry.docker-cn.com"]
-	}
+# 输入如下内容：
+
+{
+  "registry-mirrors": ["https://registry.docker-cn.com"]
+}
+
+# 重启docker
 $ sudo /etc/init.d/docker restart
 ```
 
 ### 安装 docker-compose
-```
+```shell
 $ sudo curl -L https://github.com/docker/compose/releases/download/1.17.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version

@@ -2,20 +2,23 @@
 
 ## 配置VBox网络
 1. 给ubuntu虚拟机配置双网卡，网卡1-NAT，网卡2-Host-Only。
+
 ![](./img/net-config-1.png) ![](./img/net-config-2.png)
+
 2. 检查VBox Host-Only网卡IPV4网络掩码地址，如下图中的`192.168.56.101/24`，也可采用手动配置自行修改。
+
 ![](./img/net-config-3.png)
 
 ## 虚拟机内部设置
 1. 登录虚拟机
 2. 查看网卡名称
-```
+```shell
 $ ls /sys/class/net
 enp0s3  enp0s8  lo
 # 输出3个网卡名称：enp0s3-网卡1 NAT网络; enp0s8-网卡2 Host-Only网络; lo-本地回环网络
 ```
 3. 配置静态IP
-```
+```shell
 # 编辑interfaces
 $ sudo vim /etc/network/interfaces
 ```
@@ -26,7 +29,7 @@ auto enp0s3
 iface enp0s3 inet dhcp
 
 auto enp0s8
-iface enp0s8 inet static    #为避免客户机IP频繁变动，此处推荐用静态IP
+iface enp0s8 inet static    # 为避免客户机IP频繁变动，此处推荐用静态IP
 address 192.168.56.110      # 静态IP地址，应根据 VBox Host-Only中IPV4网络掩码设置，下同
 gateway 192.168.56.1
 broadcast 192.168.56.255
@@ -35,7 +38,7 @@ netmask 255.255.255.0
 ```
 
 4. 配置路由表
-```
+```shell
 # 打印路由表，查看默认路由
 $ route
 Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
@@ -62,7 +65,7 @@ default         10.0.2.2        0.0.0.0         UG    0      0        0 enp0s3
 ```
 
 5. 重启
-```
+```shell
 $ sudo reboot
 ```
 
