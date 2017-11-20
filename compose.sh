@@ -3,6 +3,9 @@
 
 cd $DIR
 
+# 给索引sh文件添加执行权限
+find . -name \*.sh -exec chmod u+x {} \;
+
 if [ "$1" = "" ] ; then
     echo ERROR: start\|stop param missing.
 elif [ "$1" = "start" ] ; then
@@ -14,9 +17,9 @@ elif [ "$1" = "start" ] ; then
     fi
     
     # 更新fastfs的IP, 此处也可直接填写虚拟机IP
-    #IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
-    IP=192.168.0.110
-    sed -i "s|IP=.*$|IP=${IP}|g" fastdfs/docker-compose.yaml
+    # IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
+    # IP=192.168.0.110
+    # sed -i "s|IP=.*$|IP=${IP}|g" fastdfs/docker-compose.yaml
     
     echo BATCH START: activemq, fastdfs,redis-single, solr, zookeeper
     
