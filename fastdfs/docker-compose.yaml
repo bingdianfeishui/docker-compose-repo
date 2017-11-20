@@ -10,7 +10,7 @@ services:
             - WEB_PORT=8888
             - IP=192.168.0.110
         volumes:
-            - /home/docker/fdfs:/var/local/fdfs
+            - ${HOME}/docker-data/fdfs:/var/local/fdfs
         privileged: true
         network_mode: "host"
 # 此处采用host方式网络，即容器共用主机的网络设置。
