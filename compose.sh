@@ -1,16 +1,31 @@
 #!/bin/sh
 
-
+DIR=$(cd `dirname $0`; pwd)
 cd $DIR
 
+CMD=""
+
 if [ "$1" = "" ] ; then
-    echo ERROR: start\|stop param missing.
+    echo ERROR: parameter start\|stop  missing.
 elif [ "$1" = "start" ] ; then
-    # 准备数据文件夹
-    mkdir -p /home/docker/fdfs
-    if [ ! -d "/home/docker/solr-home" ] ; then
-        echo "Copy solr-home to /home/docker/ ..."
-        cp -r solr/solr-home /home/docker/
+    
+	# 自定义bridge网络：mynet
+	MYNET=`docker network ls|grep mynet`
+	if [ -z ${MYNET} ]; then
+		echo "mynet does not exists. Createing..."
+		docker network create -d bridge mynet
+	fi
+
+	# 准备数据文件夹
+	if [ ! -d "${HOME}/docker-data/fdfs" ] ; then
+		# fastdfs数据文件夹
+		echo "Creating fastdfs dir ${HOME}/docker-data/fdfs ..."
+		mkdir -p ${HOME}/docker-data/fdfs
+	fi
+    if [ ! -d "${HOME}/docker-data/solr-home" ] ; then
+		# solr数据文件夹
+        echo "Copy solr-home to ${HOME}/docker-data/ ..."
+        cp -r solr/solr-home ${HOME}/docker-data/
     fi
     
     # 更新fastfs的IP, 此处也可直接填写虚拟机IP
@@ -20,46 +35,32 @@ elif [ "$1" = "start" ] ; then
     
     echo BATCH START: activemq, fastdfs,redis-single, solr, zookeeper
     
-    cd activemq
-    docker-compose up -d
-    cd ..
-
-    cd fastdfs
-    docker-compose up -d
-    cd ..
-
-    cd redis-single
-    docker-compose up -d
-    cd ..
-
-    cd solr
-    docker-compose up -d
-    cd ..
-
-    cd zookeeper
-    docker-compose up -d
-    cd ..
+    CMD="start"
 elif [ "$1" = "stop" ]; then
-    cd activemq
-    docker-compose stop
-    cd ..
-
-    cd fastdfs
-    docker-compose stop
-    cd ..
-
-    cd redis
-    docker-compose stop
-    cd ..
-
-    cd solr
-    docker-compose stop
-    cd ..
-
-    cd zookeeper
-    docker-compose stop
-    cd ..
+	echo BATCH STOP...
+	CMD="stop"
+elif [ "$1" == "rm" -o "$1" == "del" -o "$1" == "delete" ]; then
+	echo BATCH RM...
+	CMD="rm"
 fi
 
+cd activemq
+docker-compose ${CMD}
+cd ..
 
+cd fastdfs
+docker-compose ${CMD}
+cd ..
+
+cd redis
+docker-compose ${CMD}
+cd ..
+
+cd solr
+docker-compose ${CMD}
+cd ..
+
+cd zookeeper
+docker-compose ${CMD}
+cd ..
 

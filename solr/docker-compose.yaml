@@ -7,7 +7,7 @@ services:
         ports:
             - "8983:8983"
         volumes:
-            - /home/docker/solr-home:/opt/solr/solr-home
+            - ${HOME}/docker-data/solr-home:/opt/solr/solr-home
         container_name: my_solr
         privileged: true
 
