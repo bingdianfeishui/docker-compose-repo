@@ -10,7 +10,6 @@ $ sudo nano /etc/apt/source.list
 ### 注释掉光盘源及官方源
 
 > 注释掉以下面开头的源(注释即在行首加#)
-
 ```
 # deb cdrom:[Ubuntu-Server 16.04.3 LTS _Xenial Xerus
 # deb http://cn.archive.ubuntu.com/ubuntu/
@@ -20,7 +19,6 @@ $ sudo nano /etc/apt/source.list
 ### 添加国内源
 
 > 在文件末尾加入如下内容:
-
 ```
 # 163 注释掉源码源
 deb http://mirrors.163.com/ubuntu/ xenial main restricted universe multiverse
@@ -53,6 +51,7 @@ deb http://mirrors.aliyun.com/ubuntu/ xenial-proposed main restricted universe m
 ### 安装必要环境
 
 ```
+$ sudo apt-get update
 $ sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
 ```
 
@@ -98,3 +97,5 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose --version
 docker-compose version 1.17.1, build 1719ceb
 ```
+
+完。

@@ -6,20 +6,25 @@ cd $DIR
 CMD=""
 
 if [ "$1" = "" ] ; then
-    echo ERROR: parameter start\|stop  missing.
-elif [ "$1" = "start" ] ; then
-    
-	# 自定义bridge网络：mynet
+    echo ERROR: parameter init\|start\|stop\|rm  missing.
+if [ "$1" = "init" ] then
+    echo "Initializing env ..."
+    # 自定义bridge网络：mynet
 	MYNET=`docker network ls|grep mynet`
 	if [ -z ${MYNET} ]; then
-		echo "mynet does not exists. Createing..."
+		echo "docker network \"mynet\" does not exists. Creating ..."
 		docker network create -d bridge mynet
+        if [ $0 == 0 ] then
+            echo Done...
+        else
+            echo ERROR: Creating mynet error. Please check docker network by using \"docker network ps\".
+        fi
 	fi
 
 	# 准备数据文件夹
 	if [ ! -d "${HOME}/docker-data/fdfs" ] ; then
 		# fastdfs数据文件夹
-		echo "Creating fastdfs dir ${HOME}/docker-data/fdfs ..."
+		echo "Creating fastdfs data dir ${HOME}/docker-data/fdfs ..."
 		mkdir -p ${HOME}/docker-data/fdfs
 	fi
     if [ ! -d "${HOME}/docker-data/solr-home" ] ; then
@@ -28,10 +33,11 @@ elif [ "$1" = "start" ] ; then
         cp -r solr/solr-home ${HOME}/docker-data/
     fi
     
+elif [ "$1" = "start" ] ; then
+        
     # 更新fastfs的IP, 此处也可直接填写虚拟机IP
-    #IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
-    IP=192.168.0.110
-    sed -i "s|IP=.*$|IP=${IP}|g" fastdfs/docker-compose.yaml
+    # IP=`ifconfig enp0s8 | grep inet | awk '{print $2}'| awk -F: '{print $2}'`
+    #sed -i "s|IP=.*$|IP=${IP}|g" fastdfs/docker-compose.yaml
     
     echo BATCH START: activemq, fastdfs,redis-single, solr, zookeeper
     

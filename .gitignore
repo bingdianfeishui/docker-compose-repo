@@ -12,12 +12,7 @@ local.properties
 
 apache-activemq-5.14.5-bin.tar.gz
 
-#images
-*.jpg
-*.jpeg
-*.bmp
-*.png
-*.gif
+
 
 # Eclipse Core
 .project
