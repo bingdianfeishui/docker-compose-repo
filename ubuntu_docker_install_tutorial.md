@@ -76,6 +76,10 @@ $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ub
 ```shell
 $ sudo apt-get -y update
 $ sudo apt-get -y install docker-ce
+
+# 添加当前用户到docker用户组
+$ sudo usermod -aG docker `whoami`
+
 # 检查docker
 $ docker -v
 Docker version 17.09.0-ce, build afdb6d4
