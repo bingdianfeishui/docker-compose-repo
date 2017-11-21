@@ -5,6 +5,7 @@ NGINX=/usr/local/nginx/logs/access.log
 
 ID=`docker ps|grep fastdfs|awk '{print $1}'`
 echo fastdfs.ID:$ID
+echo 'Use param tracker|storage|nginx for different service logs such as "./log.sh tracker". No param equals to "storage".'
 CAT=$1
 LOG=""
 if [[ "${CAT}" = "tracker" ]];then
