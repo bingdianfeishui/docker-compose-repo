@@ -1,0 +1,50 @@
+version: '3.0'
+
+services:
+    db:
+        image: mysql:5.7
+        container_name: mysql_db
+        volumes:
+            - ${HOME}/docker-data/db/:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: docker_db_123
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: wordpress
+
+    wordpress:
+        depends_on:
+            - db
+        image: wordpress:latest
+        container_name: wordpress
+        ports:
+            - 6680:80
+        volumes:
+            - ${HOME}/docker-data/wordpress/wp-content/:/var/www/html/wp-content/
+        restart: always
+        privileged: true
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_NAME: wordpress
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: wordpress
+
+    # mysql php manager
+    adminer:
+        depends_on:
+            - db
+        image: adminer:latest
+        container_name: adminer
+        restart: always
+        ports:
+            - 6690:8080
+# volumes:
+#    db_data:${HOME}/docker-data/db/
+#    wp_content:${HOME}/docker-data/wordpress/wp-content/
+    
+networks:
+    default:
+        external:
+            name: mynet
+

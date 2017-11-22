@@ -6,7 +6,7 @@ services:
         image: mysql
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: 123
+            MYSQL_ROOT_PASSWORD: docker_db_123
         ports:
             - "3306:3306"
 
