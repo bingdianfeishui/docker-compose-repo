@@ -1,0 +1,24 @@
+version: '3.0'
+
+services:
+    transmission:
+        image: linuxserver/transmission:latest
+        restart: always
+        container_name: transmission
+        environment:
+            - PGID=996
+            - PUID=1000
+            - TZ="Asia/Shanghai"
+        volumes:
+            - /home/bittorrent/config/:/config
+            - /home/bittorrent/downloads:/downloads
+            - /home/bittorrent/watch:/watch
+        ports:
+            - 9091:9091
+            - 51413:51413
+            - 51413:51413/udp
+
+networks:
+    default:
+        external:
+            name: mynet

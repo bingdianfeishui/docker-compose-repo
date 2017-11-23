@@ -6,12 +6,15 @@ services:
         container_name: mysql_db
         volumes:
             - ${HOME}/docker-data/db/:/var/lib/mysql
+            #- db_data: /var/lib/mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: docker_db_123
-            MYSQL_DATABASE: wordpress
-            MYSQL_USER: wordpress
-            MYSQL_PASSWORD: wordpress
+            MYSQL_DATABASE: younng_db
+            MYSQL_USER: younng
+            MYSQL_PASSWORD: younng_db_123
+        #ports:
+        #    - 33306:3306
 
     wordpress:
         depends_on:
@@ -19,16 +22,17 @@ services:
         image: wordpress:latest
         container_name: wordpress
         ports:
-            - 6680:80
+            - 8010:80
         volumes:
             - ${HOME}/docker-data/wordpress/wp-content/:/var/www/html/wp-content/
+            #- wp_content: /var/www/html/wp-content/
         restart: always
-        privileged: true
+        # privileged: true
         environment:
             WORDPRESS_DB_HOST: db:3306
-            WORDPRESS_DB_NAME: wordpress
-            WORDPRESS_DB_USER: wordpress
-            WORDPRESS_DB_PASSWORD: wordpress
+            WORDPRESS_DB_NAME: younng_db
+            WORDPRESS_DB_USER: younng
+            WORDPRESS_DB_PASSWORD: younng_db_123
 
     # mysql php manager
     adminer:
@@ -38,10 +42,14 @@ services:
         container_name: adminer
         restart: always
         ports:
-            - 6690:8080
+            - 8020:8080
 # volumes:
-#    db_data:${HOME}/docker-data/db/
-#    wp_content:${HOME}/docker-data/wordpress/wp-content/
+#     db_data:
+#         external:
+#             name: ~/docker-data/db
+#     wp_content:
+#         external:
+#             name: ~/docker-data/wordpress/wp-content
     
 networks:
     default:
