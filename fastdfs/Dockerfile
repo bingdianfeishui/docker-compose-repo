@@ -1,6 +1,7 @@
+# 使用超小的Linux镜像alpine
 FROM alpine:3.6
 
-MAINTAINER Bubble Shrimp <bingdianfeishui@gmail.com>
+MAINTAINER YoungCoding <bingdianfeishui@gmail.com>
 
 ENV HOME /root
 
@@ -8,7 +9,7 @@ ENV HOME /root
 RUN    apk update \
         && apk add --no-cache --virtual .build-deps bash gcc libc-dev make openssl-dev pcre-dev zlib-dev linux-headers curl gnupg libxslt-dev gd-dev geoip-dev
 
-# 下载fastdfs源文件
+# 下载fastdfs、libfastcommon、nginx插件的源码
 RUN     cd /root \
         && curl -fSL https://github.com/happyfish100/libfastcommon/archive/V1.0.36.tar.gz -o fastcommon.tar.gz \
         && curl -fSL  https://codeload.github.com/happyfish100/fastdfs/tar.gz/V5.11 -o fastfs.tar.gz \
@@ -22,7 +23,7 @@ RUN     cd ${HOME}/libfastcommon-1.0.36/ \
         && ./make.sh \
         && ./make.sh install
 
-# 安装fastdfs5.11
+# 安装fastdfs v5.11
 RUN     cd ${HOME}/fastdfs-5.11/ \
         && ./make.sh \
         && ./make.sh install
@@ -74,9 +75,12 @@ RUN apk del .build-deps gcc libc-dev make openssl-dev linux-headers curl gnupg l
 RUN apk add bash pcre-dev zlib-dev
 
 
-# 启动脚本
+# 配置启动脚本，在启动时中根据环境变量替换nginx端口、fastdfs端口
+# 默认nginx端口
 ENV WEB_PORT 8888
+# 默认fastdfs端口
 ENV FDFS_PORT 22122
+# 创建启动脚本
 RUN     echo -e "\
 mkdir -p /var/local/fdfs/storage/data /var/local/fdfs/tracker; \n\
 ln -s /var/local/fdfs/storage/data/ /var/local/fdfs/storage/data/M00; \n\n\
@@ -95,10 +99,7 @@ tail -f /usr/local/nginx/logs/access.log \
 ">/start.sh \
 && chmod u+x /start.sh
 
-# 暴露端口
+# 暴露端口。改为采用host网络，不需要单独暴露端口
 # EXPOSE 80 22122
 
 ENTRYPOINT ["/bin/bash","/start.sh"]
-# CMD ["-D"]
-
-

@@ -1,6 +1,6 @@
 # docker-compose-repo
 
-> docker-compose配置文件仓库，包含常用solr/activeMQ/redis/zookeeper/fastdfs等docker容器配置，用于快速搭建个人开发环境。在VirtualBox+Ubuntu虚拟机环境下及debian 9实体机上使用正常。
+>docker-compose配置文件仓库，包含常用solr/activeMQ/redis/zookeeper/fastdfs等docker容器配置，用于快速搭建个人开发环境。在VirtualBox+Ubuntu16.04虚拟机环境下及debian 9实体机上使用正常。
 
 ## 虚拟机测试环境
 * Ubuntu Server 16.04 x64
@@ -13,10 +13,10 @@
 ### 2. 在VBox内安装Ubuntu虚拟机(以下简称客户机)
 略。如需用ssh，请勾选安装OpenSSH server。
 ### 3. 配置客户机网络
-请见[Ubuntu + Virtual Box 双网卡上内外网配置](./Ubuntu_VBox_Dual_NICs_Config.md).
+请见[Virtual Box内Ubuntu系统虚拟机双网卡上内外网配置(Debian系适用)](https://www.youngcoding.top/linux/77.html).
 
 ## 安装docker-ce和docker-compose
-请见[Ubuntu docker 安装教程](./ubuntu_docker_install_tutorial.md).
+请见[Ubuntu安装docker和docker-compose](https://www.youngcoding.top/linux/76.html).
 
 ## 启动
 

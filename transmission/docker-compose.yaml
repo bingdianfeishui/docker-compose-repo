@@ -10,9 +10,9 @@ services:
             - PUID=1000
             - TZ="Asia/Shanghai"
         volumes:
-            - /home/bittorrent/config/:/config
-            - /home/bittorrent/downloads:/downloads
-            - /home/bittorrent/watch:/watch
+            - ${HOME}/transmission/config/:/config
+            - ${HOME}/transmission/downloads:/downloads
+            - ${HOME}/transmission/watch:/watch
         ports:
             - 9091:9091
             - 51413:51413
